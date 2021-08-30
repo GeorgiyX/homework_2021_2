@@ -9,8 +9,8 @@ function arabic2roman(number) {
     let result = '';
     arabicPatterns.forEach((pattern) => {
         while (number >= pattern[ARABIC]) {
-            result += pattern[ROMAN]
-            number -= pattern[ARABIC]
+            result += pattern[ROMAN];
+            number -= pattern[ARABIC];
         }
     });
     return result;
@@ -31,7 +31,7 @@ function roman2arabic(number) {
 function roman(number) {
     const inputType = typeof(number);
     if (inputType != "string" && inputType != "number") {
-         throw new TypeError("Неверный тип входных данных!")
+         throw new TypeError("Неверный тип входных данных!");
     }
     return isNaN(parseInt(number)) ? roman2arabic(number) : arabic2roman(number);
 }
