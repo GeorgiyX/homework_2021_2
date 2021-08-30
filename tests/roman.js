@@ -46,7 +46,17 @@ QUnit.module('Дополнительные тесты на функцию roman'
 		assert.throws(() => roman({foo: "bar"}), TypeError);
 	});
 
-	QUnit.test('roman регистроне зависима', function (assert) {
+	QUnit.test('roman регистро независима', function (assert) {
+		assert.strictEqual(roman('MMMXC'), 3090);
+		assert.strictEqual(roman('mmmxc'), 3090);
+		assert.strictEqual(roman('mMmxC'), 3090);
+	});
+
+	QUnit.test('roman выдает одинаковый результат при конвертировании из римской в десятичную и наоборот', function (assert) {
+		let romanian = '';
+		for (let arabic = 0; arabic < 3999; arabic++) {
+			romanian = roman(arabic);
+			assert.strictEqual(roman(romanian), arabic);
+		}
 	});
 });
-
