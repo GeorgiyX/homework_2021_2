@@ -38,3 +38,15 @@ QUnit.module('Тестируем функцию roman', function () {
 		assert.strictEqual(roman('2017'), 'MMXVII');
 	});
 });
+
+QUnit.module('Дополнительные тесты на функцию roman', function () {
+	QUnit.test('roman не работает с неподходящими типами данных', function (assert) {
+		assert.throws(() => roman(null), TypeError);
+		assert.throws(() => roman(undefined), TypeError);
+		assert.throws(() => roman({foo: "bar"}), TypeError);
+	});
+
+	QUnit.test('roman регистроне зависима', function (assert) {
+	});
+});
+
