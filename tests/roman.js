@@ -54,7 +54,7 @@ QUnit.module('Дополнительные тесты на функцию roman'
 
 	QUnit.test('roman выдает одинаковый результат при конвертировании из римской в десятичную и наоборот', function (assert) {
 		let romanian = '';
-		for (let arabic = 0; arabic < 3999; arabic++) {
+		for (let arabic = 0; arabic < 2500; arabic++) {
 			romanian = roman(arabic);
 			assert.strictEqual(roman(romanian), arabic);
 		}

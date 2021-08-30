@@ -20,10 +20,10 @@ function roman2arabic(number) {
     number = number.toUpperCase();
     let result = 0;
     romanianPatterns.forEach((pattern) => {
-        while (number.indexOf(pattern[ROMAN]) != -1) {
+        number = number.replaceAll(pattern[ROMAN], () => {
             result += pattern[ARABIC];
-            number = number.replace(pattern[ROMAN], "")
-        }
+            return ""; 
+        });
     });
     return result;
 }
