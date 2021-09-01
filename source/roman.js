@@ -34,8 +34,8 @@ function arabic2roman(number) {
  */
 function roman2arabic(number) {
     number = number.toUpperCase();
-    if(!isNaN(number.match(/[^IVXLCDM]/)) || !isNaN(number.match(/([A-Z])\1{4,}/)) {
-	throw new InputError('Ошибка во входных данных (запись числа римскими)')
+    if(!isNaN(number.match(/[^IVXLCDM]/)) || !isNaN(number.match(/([A-Z])\1{4,}/))) {
+	throw new InputError('Ошибка во входных данных (запись числа римскими)');
     }
     let result = 0;
     Object.entries(patterns).sort((lhs, rhs) => { 
