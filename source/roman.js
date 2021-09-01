@@ -36,7 +36,7 @@ function arabic2roman(number) {
  */
 function roman2arabic(number) {
     number = number.toUpperCase();
-    if (number.match(/[^IVXLCDM]/) || number.match(/([A-Z])\1{4,}/)) {
+    if (number.match(/[^IVXLCDM]/) || number.match(/([A-Z])\1{3,}/)) {
 	throw new Error('Повторы Ошибка во входных данных (запись числа римскими)');
     }
 
