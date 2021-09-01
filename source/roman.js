@@ -34,10 +34,7 @@ function arabic2roman(number) {
  */
 function roman2arabic(number) {
     number = number.toUpperCase();
-    if (!isNaN(number.match(/[^IVXLCDM]/))) {
-	throw new Error('Не roman символы')
-    }
-    if (!isNaN(number.match(/([A-Z])\1{4,}/))) {
+    if (number.match(/[^IVXLCDM]/)) || number.match(/([A-Z])\1{4,}/)) {
 	throw new Error('Повторы Ошибка во входных данных (запись числа римскими)');
     }
     let result = 0;
