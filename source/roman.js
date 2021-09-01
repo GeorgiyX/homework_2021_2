@@ -11,7 +11,7 @@ const ROMAN = 0, ARABIC = 1;
 function arabic2roman(number) {
     number = +number;
     if (!Number.isInteger(number) || number < 0 || number > 3999) {
-       throw new InputError('Ошибка во входных данных')
+       throw new InputError('Ошибка во входных данных (запись числа арабскими)');
     }
     let result = '';
     Object.entries(patterns).sort((lhs, rhs) => {
@@ -34,6 +34,9 @@ function arabic2roman(number) {
  */
 function roman2arabic(number) {
     number = number.toUpperCase();
+    if(!isNaN(number.match(/[^IVXLCDM]/)) || !isNaN(number.match(/([A-Z])\1{4,}/)) {
+	throw new InputError('Ошибка во входных данных (запись числа римскими)')
+    }
     let result = 0;
     Object.entries(patterns).sort((lhs, rhs) => { 
         return rhs[ROMAN].length - lhs[ROMAN].length;
