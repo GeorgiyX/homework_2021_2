@@ -10,6 +10,9 @@ const ROMAN = 0, ARABIC = 1;
  */
 function arabic2roman(number) {
     number = +number;
+    if (!Number.isInteger(number) || number < 0 || number > 3999) {
+       throw new InputError('Ошибка во входных данных')
+    }
     let result = '';
     Object.entries(patterns).sort((lhs, rhs) => {
         /* В случае равенства чисел, сортируем их по длине римской записи числа. */ 

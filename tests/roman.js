@@ -59,4 +59,9 @@ QUnit.module('Дополнительные тесты на функцию roman'
 			assert.strictEqual(roman(romanian), arabic);
 		}
 	});
+
+	QUnit.test('roman проверяет входные значения записанные арабскими цифрами', function(assert) {
+ 		assert.throws(() => {roman(4000), InputError});
+		assert.throws(() => {roman(-100), InputError});
+        });
 });
