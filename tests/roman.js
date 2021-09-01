@@ -61,13 +61,13 @@ QUnit.module('Дополнительные тесты на функцию roman'
 	});
 
 	QUnit.test('roman проверяет входные значения записанные арабскими цифрами', function(assert) {
- 		assert.throws(() => {roman(4000)}, InputError);
-		assert.throws(() => {roman(-100)}, InputError);
+ 		assert.throws(() => {roman(4000)}, Error);
+		assert.throws(() => {roman(-100)}, Error);
         });
 
 	QUnit.test('roman проверяет входные значения записанные римскими цифрами', function(assert) {
-		assert.throws(() => {roman('fooBar')}, InputError);
-		assert.throws(() => {roman('MMMMMXIV')}, InputError);
-		assert.throws(() => {roman('XVIa')}, InputError);
+		assert.throws(() => {roman('fooBar')}, Error);
+		assert.throws(() => {roman('MMMMMXIV')}, Error);
+		assert.throws(() => {roman('XVIa')}, Error);
         });
 });
