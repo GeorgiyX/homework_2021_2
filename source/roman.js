@@ -13,6 +13,7 @@ function arabic2roman(number) {
     if (!Number.isInteger(number) || number < 0 || number > 3999) {
        throw new Error('Ошибка во входных данных (запись числа арабскими)');
     }
+
     let result = '';
     Object.entries(patterns).sort((lhs, rhs) => {
         /* В случае равенства чисел, сортируем их по длине римской записи числа. */ 
@@ -24,6 +25,7 @@ function arabic2roman(number) {
             number -= pattern[ARABIC];
         }
     });
+
     return result;
 }
 
@@ -37,6 +39,7 @@ function roman2arabic(number) {
     if (number.match(/[^IVXLCDM]/) || number.match(/([A-Z])\1{4,}/)) {
 	throw new Error('Повторы Ошибка во входных данных (запись числа римскими)');
     }
+
     let result = 0;
     Object.entries(patterns).sort((lhs, rhs) => { 
         return rhs[ROMAN].length - lhs[ROMAN].length;
@@ -46,6 +49,7 @@ function roman2arabic(number) {
             return ""; 
         });
     });
+
     return result;
 }
 
@@ -60,5 +64,6 @@ function roman(number) {
     if (inputType != "string" && inputType != "number") {
          throw new TypeError("Неверный тип входных данных!");
     }
+
     return isNaN(+number) ? roman2arabic(number) : arabic2roman(number);
 }
