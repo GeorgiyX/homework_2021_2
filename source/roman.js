@@ -1,7 +1,7 @@
 'use strict';
 
-const patterns = {'IIII': 4, 'IV': 4, 'CM': 900, 'CD': 400, 'XC': 90, 'IX': 9, 'XL': 40, 'M': 1000, 'D': 500, 'C': 100, 'L': 50, 'X': 10, 'V': 5, 'I': 1}
-const ROMAN = 0, ARABIC = 1;
+const patterns = { 'IIII': 4, 'IV': 4, 'CM': 900, 'CD': 400, 'XC': 90, 'IX': 9, 'XL': 40, 'M': 1000, 'D': 500, 'C': 100, 'L': 50, 'X': 10, 'V': 5, 'I': 1 }
+const ROMAN = 0, ARABIC = 1, MAX_VALUE = 3999, MIN_VALUE = 0;
 
 /**
  * Переводит запись чила арабскими цифрами в число записанное римскими цифрами
@@ -10,15 +10,16 @@ const ROMAN = 0, ARABIC = 1;
  */
 function arabic2roman(number) {
     number = +number;
-    if (!Number.isInteger(number) || number < 0 || number > 3999) {
-       throw new Error('Ошибка во входных данных (запись числа арабскими)');
+    if (!Number.isInteger(number) || number < MIN_VALUE || number > MAX_VALUE) {
+        throw new Error('Ошибка во входных данных (запись числа арабскими)');
     }
 
     let result = '';
-    Object.entries(patterns).sort((lhs, rhs) => {
-        /* В случае равенства чисел, сортируем их по длине римской записи числа. */ 
-        return rhs[ARABIC] == lhs[ARABIC] ? lhs[ROMAN].length - rhs[ROMAN].length 
-                                          : rhs[ARABIC] - lhs[ARABIC];
+    Object.entries(patterns).sort((leftPattern, rightPattern) => {
+        /* В случае равенства чисел, сортируем их по длине римской записи числа. */
+        return rightPattern[ARABIC] == leftPattern[ARABIC] ? 
+               leftPattern[ROMAN].length - rightPattern[ROMAN].length :
+               rightPattern[ARABIC] - leftPattern[ARABIC];
     }).forEach((pattern) => {
         while (number >= pattern[ARABIC]) {
             result += pattern[ROMAN];
@@ -36,17 +37,17 @@ function arabic2roman(number) {
  */
 function roman2arabic(number) {
     number = number.toUpperCase();
-    if (number.match(/[^IVXLCDM]/) || number.match(/([A-Z])\1{3,}/)) {
-	throw new Error('Повторы Ошибка во входных данных (запись числа римскими)');
+    if (number.match(/[^IVXLCDM]/) || number.match(/([A-Z])\1{3,}/) && number !== 'IIII') {
+        throw new Error('Ошибка во входных данных (запись числа римскими)');
     }
 
     let result = 0;
-    Object.entries(patterns).sort((lhs, rhs) => { 
+    Object.entries(patterns).sort((lhs, rhs) => {
         return rhs[ROMAN].length - lhs[ROMAN].length;
     }).forEach((pattern) => {
         number = number.replaceAll(pattern[ROMAN], () => {
             result += pattern[ARABIC];
-            return ""; 
+            return '';
         });
     });
 
@@ -61,8 +62,8 @@ function roman2arabic(number) {
  */
 function roman(number) {
     const inputType = typeof(number);
-    if (inputType != "string" && inputType != "number") {
-         throw new TypeError("Неверный тип входных данных!");
+    if (inputType !== 'string' && inputType !== 'number') {
+        throw new TypeError('Неверный тип входных данных!');
     }
 
     return isNaN(+number) ? roman2arabic(number) : arabic2roman(number);
