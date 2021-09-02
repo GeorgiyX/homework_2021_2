@@ -8,7 +8,7 @@ const ROMAN = 0, ARABIC = 1, MAX_VALUE = 3999, MIN_VALUE = 0;
  * @param {string | number} number Число, записанное арабскими цифрами
  * @returns Римскую запись этого же числа
  */
-function arabic2roman(number) {
+const arabic2roman = (number) => {
     number = +number;
     if (!Number.isInteger(number) || number < MIN_VALUE || number > MAX_VALUE) {
         throw new Error('Ошибка во входных данных (запись числа арабскими)');
@@ -35,7 +35,7 @@ function arabic2roman(number) {
  * @param {string} number Число, записанное римскими цифрами
  * @returns Арабскую запись этого же числа
  */
-function roman2arabic(number) {
+const roman2arabic = (number) => {
     number = number.toUpperCase();
     if (number.match(/[^IVXLCDM]/) || number.match(/([A-Z])\1{3,}/) && number !== 'IIII') {
         throw new Error('Ошибка во входных данных (запись числа римскими)');
@@ -60,7 +60,7 @@ function roman2arabic(number) {
  * представлена строкой, десятичная арабская - может быть как числом так и строкой
  * @returns Число переведеное в противоположную форму записи
  */
-function roman(number) {
+const roman = (number) => {
     const inputType = typeof(number);
     if (inputType !== 'string' && inputType !== 'number') {
         throw new TypeError('Неверный тип входных данных!');
